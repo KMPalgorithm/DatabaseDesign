@@ -4,10 +4,10 @@ Design Homework for Database course
 ---
 
 ## Team member：
-* lc
-* dzh
-* wj
-* zty
+* 骆晨
+* 邓卓宏
+* 王钧
+* 赵天元
 * ~~wyc~~
 
 ---
@@ -15,5 +15,6 @@ Design Homework for Database course
 (plz change to your real name if you see it)
 
 ## Topic:
+###  豆瓣电影评价网站数据库系统
 
 ## Decription:
