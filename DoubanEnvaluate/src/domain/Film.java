@@ -3,9 +3,9 @@ package domain;
 public class Film {
 	private String FID;
 	private String FN;
-	private String LR;  //leading role
-	private String ED;  
-	private String DIR; //director
+//	private String LR;  //leading role
+//	private String ED;  
+//	private String DIR; //director
 	private String TYPE;
 	private String AREA;
 	private String LNG;
@@ -41,12 +41,7 @@ public class Film {
 	public void setCT5(String cT5) {
 		CT5 = cT5;
 	}
-	public void setDIR(String dIR) {
-		DIR = dIR;
-	}
-	public void setED(String eD) {
-		ED = eD;
-	}
+
 	public void setFID(String fID) {
 		FID = fID;
 	}
@@ -61,9 +56,6 @@ public class Film {
 	}
 	public void setLNG(String lNG) {
 		LNG = lNG;
-	}
-	public void setLR(String lR) {
-		LR = lR;
 	}
 	public void setPOS(String pOS) {
 		POS = pOS;
