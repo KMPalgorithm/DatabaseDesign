@@ -7,13 +7,25 @@ public class User {
 	private String PN;
 	private String EMAIL;
 	
+	public User(String uid, String un, String pwd, String pn, String email)
+	{
+		UID=uid;
+		PWD=pwd;
+		PN=pn;
+		UN=un;
+		EMAIL=email;
+	}
+	
+	public User()
+	{}
+	
 	public String getUID() {
 		return UID;
 	}
 	public void setUID(String uID) {
 		UID = uID;
 	}
-	public String getEMAIL() {
+	public String getEmail() {
 		return EMAIL;
 	}
 	public void setEMAIL(String eMAIL) {
