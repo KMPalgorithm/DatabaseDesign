@@ -60,6 +60,13 @@ public class Test {
 		java.sql.Date date = new java.sql.Date(dd.getTime());
 		Reply reply = new Reply("101","123",date,"sb",10);
 		RDI.insertReply(reply);*/
+		/*ATypeDAOImpl ATDI = new ATypeDAOImpl();
+		AType atype = new AType("0123","1234");
+		ATDI.insertAType(atype);*/
+		AwardsDAOImpl ASDI = new AwardsDAOImpl();
+		Awards awards = new Awards("111","0123","11011","1");
+		
+		ASDI.insertAwards(awards);
 		
 	}
 
