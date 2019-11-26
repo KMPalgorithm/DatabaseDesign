@@ -4,29 +4,23 @@ import java.util.*;
 import domain.*;
 import java.sql.*;
 
-public class FilmDAOImpl extends DAOBase implements FilmDAO
+public class AwardDAOImpl extends DAOBase implements AwardDAO
 {
-	private static final String CREATE_FILM_SQL = "INSERT INTO [Film] VALUES(?,?,?,?,?,?,?,?,?)";
-	private static final String DELETE_FILM_SQL = "DELETE FROM [Film] WHERE FID=?";
-	private static final String GET_FILM_BYUID_SQL = "SELECT * FROM [Film] WHERE FID=?";
+	private static final String CREATE_AWARD_SQL = "INSERT INTO [Award] VALUES(?,?,?)";
+	private static final String DELETE_AWARD_SQL = "DELETE FROM [Award] WHERE AID=?";
+	private static final String GET_AWARD_BYAID_SQL = "SELECT * FROM [Award] WHERE AID=?";
 	@Override
-	public void insertFilm(Film Film)
+	public void insertAward(Award Award)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(CREATE_FILM_SQL);
-			pstm.setString(1,Film.getFID());
-			pstm.setString(2,Film.getFN());
-			pstm.setString(3,Film.getTYPE());
-			pstm.setString(4,Film.getAREA());
-			pstm.setString(5,Film.getLNG());
-			pstm.setInt(6,Film.getFT());
-			pstm.setString(7,Film.getLNG());
-			pstm.setString(8,Film.getLNG());
-			pstm.setString(9,Film.getLNG());
+			pstm = conn.prepareStatement(CREATE_AWARD_SQL);
+			pstm.setString(1,Award.getAID());
+			pstm.setString(2,Award.getAName());
+			pstm.setString(3,Award.getAIntro());
 			int row = pstm.executeUpdate();
 			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
@@ -37,28 +31,21 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			e.printStackTrace();
 		}
 	}
-	public void updateFilm(Film Film)
+	public void updateAward(Award Award)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(DELETE_FILM_SQL);
-			pstm.setString(1,Film.getFID());
+			pstm = conn.prepareStatement(DELETE_AWARD_SQL);
+			pstm.setString(1,Award.getAID());
 			int row = pstm.executeUpdate();
 			pstm.close();
-			pstm = conn.prepareStatement(CREATE_FILM_SQL);
-			pstm.setString(1,Film.getFID());
-			pstm.setString(2,Film.getFN());
-			pstm.setString(3,Film.getTYPE());
-			pstm.setString(4,Film.getAREA());
-			pstm.setString(5,Film.getLNG());
-			pstm.setInt(6,Film.getFT());
-			pstm.setString(7,Film.getLNG());
-			pstm.setString(8,Film.getLNG());
-			pstm.setString(9,Film.getLNG());
-			row = pstm.executeUpdate();
+			pstm = conn.prepareStatement(CREATE_AWARD_SQL);
+			pstm.setString(1,Award.getAID());
+			pstm.setString(2,Award.getAName());
+			pstm.setString(3,Award.getAIntro());
 			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
 			conn.close();
@@ -68,15 +55,15 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			e.printStackTrace();
 		}
 	}
-	public void deleteFilm(String fid)
+	public void deleteAward(String uid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(DELETE_FILM_SQL);
-			pstm.setString(1,fid);
+			pstm = conn.prepareStatement(DELETE_AWARD_SQL);
+			pstm.setString(1,uid);
 			int row = pstm.executeUpdate();
 			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
@@ -113,7 +100,7 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		}
 	}
 	
-	public Film getFilm(String fid)
+	public Award getAward(String aid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -121,13 +108,13 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(GET_FILM_BYUID_SQL);
-			pstm.setString(1,fid);
+			pstm = conn.prepareStatement(GET_AWARD_BYAID_SQL);
+			pstm.setString(1,aid);
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				Film film = new Film(rset.getString("FID"),rset.getString("FN"),rset.getString("TYPE"),rset.getString("AREA"),rset.getString("LNG"),rset.getInt("FT"),rset.getString("AN"),rset.getString("INTRO"),rset.getString("POS"));
-				return film;
+				Award award = new Award(rset.getString("AID"),rset.getString("AName"),rset.getString("AIntro"));
+				return award;
 			}
 			pstm.close();
 			conn.close();
@@ -143,9 +130,9 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		}
 		return null;
 	}
-	public List<Film> getFilmByC(String sql)
+	public List<Award> getAwardByC(String sql)
 	{
-		List<Film> films = new ArrayList<Film>();
+		List<Award> awards = new ArrayList<Award>();
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rset = null;
@@ -156,9 +143,9 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				Film film = new Film(rset.getString("FID"),rset.getString("FN"),rset.getString("TYPE"),rset.getString("AREA"),rset.getString("LNG"),rset.getInt("FT"),rset.getString("AN"),rset.getString("INTRO"),rset.getString("POS"));
-				films.add(film);
-				//return film;
+				Award award = new Award(rset.getString("AID"),rset.getString("AName"),rset.getString("AIntro"));
+				awards.add(award);
+				//return award;
 			}
 			pstm.close();
 			conn.close();
@@ -172,6 +159,6 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		{
 			this.release(conn,pstm,rset);
 		}
-		return films;
+		return awards;
 	}
 }

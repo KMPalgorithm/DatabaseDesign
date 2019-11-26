@@ -4,29 +4,27 @@ import java.util.*;
 import domain.*;
 import java.sql.*;
 
-public class FilmDAOImpl extends DAOBase implements FilmDAO
+public class ChatDAOImpl extends DAOBase implements ChatDAO
 {
-	private static final String CREATE_FILM_SQL = "INSERT INTO [Film] VALUES(?,?,?,?,?,?,?,?,?)";
-	private static final String DELETE_FILM_SQL = "DELETE FROM [Film] WHERE FID=?";
-	private static final String GET_FILM_BYUID_SQL = "SELECT * FROM [Film] WHERE FID=?";
+	private static final String CREATE_CHAT_SQL = "INSERT INTO [Chat] VALUES(?,?,?,?,?,?,?)";
+	private static final String DELETE_CHAT_SQL = "DELETE FROM [Chat] WHERE ChatID=?";
+	private static final String GET_CHAT_BYTID_SQL = "SELECT * FROM [Chat] WHERE ChatID=?";
 	@Override
-	public void insertFilm(Film Film)
+	public void insertChat(Chat chat)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(CREATE_FILM_SQL);
-			pstm.setString(1,Film.getFID());
-			pstm.setString(2,Film.getFN());
-			pstm.setString(3,Film.getTYPE());
-			pstm.setString(4,Film.getAREA());
-			pstm.setString(5,Film.getLNG());
-			pstm.setInt(6,Film.getFT());
-			pstm.setString(7,Film.getLNG());
-			pstm.setString(8,Film.getLNG());
-			pstm.setString(9,Film.getLNG());
+			pstm = conn.prepareStatement(CREATE_CHAT_SQL);
+			pstm.setString(1,chat.getFID());
+			pstm.setString(2,chat.getCID());
+			pstm.setString(3,chat.getUID());
+			pstm.setDate(4,chat.getDate());
+			pstm.setString(5,chat.getTitle());
+			pstm.setString(6,chat.getCont());
+			pstm.setInt(7,chat.getLikeNum());
 			int row = pstm.executeUpdate();
 			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
@@ -37,28 +35,25 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			e.printStackTrace();
 		}
 	}
-	public void updateFilm(Film Film)
+	public void updateChat(Chat chat)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(DELETE_FILM_SQL);
-			pstm.setString(1,Film.getFID());
+			pstm = conn.prepareStatement(DELETE_CHAT_SQL);
+			pstm.setString(1,chat.getCID());
 			int row = pstm.executeUpdate();
 			pstm.close();
-			pstm = conn.prepareStatement(CREATE_FILM_SQL);
-			pstm.setString(1,Film.getFID());
-			pstm.setString(2,Film.getFN());
-			pstm.setString(3,Film.getTYPE());
-			pstm.setString(4,Film.getAREA());
-			pstm.setString(5,Film.getLNG());
-			pstm.setInt(6,Film.getFT());
-			pstm.setString(7,Film.getLNG());
-			pstm.setString(8,Film.getLNG());
-			pstm.setString(9,Film.getLNG());
-			row = pstm.executeUpdate();
+			pstm = conn.prepareStatement(CREATE_CHAT_SQL);
+			pstm.setString(1,chat.getFID());
+			pstm.setString(2,chat.getCID());
+			pstm.setString(3,chat.getUID());
+			pstm.setDate(4,chat.getDate());
+			pstm.setString(5,chat.getTitle());
+			pstm.setString(6,chat.getCont());
+			pstm.setInt(7,chat.getLikeNum());
 			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
 			conn.close();
@@ -68,15 +63,15 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			e.printStackTrace();
 		}
 	}
-	public void deleteFilm(String fid)
+	public void deleteChat(String uid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(DELETE_FILM_SQL);
-			pstm.setString(1,fid);
+			pstm = conn.prepareStatement(DELETE_CHAT_SQL);
+			pstm.setString(1,uid);
 			int row = pstm.executeUpdate();
 			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
@@ -113,7 +108,7 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		}
 	}
 	
-	public Film getFilm(String fid)
+	public Chat getChat(String cid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -121,13 +116,13 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(GET_FILM_BYUID_SQL);
-			pstm.setString(1,fid);
+			pstm = conn.prepareStatement(GET_CHAT_BYTID_SQL);
+			pstm.setString(1,cid);
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				Film film = new Film(rset.getString("FID"),rset.getString("FN"),rset.getString("TYPE"),rset.getString("AREA"),rset.getString("LNG"),rset.getInt("FT"),rset.getString("AN"),rset.getString("INTRO"),rset.getString("POS"));
-				return film;
+				Chat chat = new Chat(rset.getString("FID"),rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Title"),rset.getString("Cont"),rset.getInt("LinkeNum"));
+				return chat;
 			}
 			pstm.close();
 			conn.close();
@@ -143,9 +138,9 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		}
 		return null;
 	}
-	public List<Film> getFilmByC(String sql)
+	public List<Chat> getChatByC(String sql)
 	{
-		List<Film> films = new ArrayList<Film>();
+		List<Chat> chats = new ArrayList<Chat>();
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rset = null;
@@ -156,9 +151,9 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				Film film = new Film(rset.getString("FID"),rset.getString("FN"),rset.getString("TYPE"),rset.getString("AREA"),rset.getString("LNG"),rset.getInt("FT"),rset.getString("AN"),rset.getString("INTRO"),rset.getString("POS"));
-				films.add(film);
-				//return film;
+				Chat chat = new Chat(rset.getString("FID"),rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Title"),rset.getString("Cont"),rset.getInt("LinkeNum"));
+				chats.add(chat);
+				//return chat;
 			}
 			pstm.close();
 			conn.close();
@@ -172,6 +167,6 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		{
 			this.release(conn,pstm,rset);
 		}
-		return films;
+		return chats;
 	}
 }

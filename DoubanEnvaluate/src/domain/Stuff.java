@@ -1,17 +1,35 @@
 package domain;
 
+import java.sql.Date;
+
 public class Stuff {
 	private String SID;
 	private String SN;
 	private String Sex;
-	private String BDate;
+	private Date BDate;
 	private String BP;
 	private String Voca;
 	private String MN;
 	private String SIntro;
-	private String Spic;
+	private String SPic;
 	
-	public void setBDate(String bDate) {
+	public Stuff()
+	{}
+	
+	public Stuff(String sid, String sn, String sex, Date bdate, String bp, String voca, String mn, String sintro, String spic)
+	{
+		SID=sid;
+		SN=sn;
+		Sex=sex;
+		BDate=bdate;
+		BP=bp;
+		Voca=voca;
+		MN=mn;
+		SIntro = sintro;
+		SPic = spic;
+	}
+	
+	public void setBDate(Date bDate) {
 		BDate = bDate;
 	}
 	public void setBP(String bP) {
@@ -37,7 +55,7 @@ public class Stuff {
 	}
 	
 	
-	public String getBDate() {
+	public Date getBDate() {
 		return BDate;
 	}
 	public String getBP() {
@@ -58,8 +76,8 @@ public class Stuff {
 	public String getSN() {
 		return SN;
 	}
-	public String getSpic() {
-		return Spic;
+	public String getSPic() {
+		return SPic;
 	}
 	public String getVoca() {
 		return Voca;

@@ -4,29 +4,22 @@ import java.util.*;
 import domain.*;
 import java.sql.*;
 
-public class FilmDAOImpl extends DAOBase implements FilmDAO
+public class TagDAOImpl extends DAOBase implements TagDAO
 {
-	private static final String CREATE_FILM_SQL = "INSERT INTO [Film] VALUES(?,?,?,?,?,?,?,?,?)";
-	private static final String DELETE_FILM_SQL = "DELETE FROM [Film] WHERE FID=?";
-	private static final String GET_FILM_BYUID_SQL = "SELECT * FROM [Film] WHERE FID=?";
+	private static final String CREATE_TAG_SQL = "INSERT INTO [Tag] VALUES(?,?)";
+	private static final String DELETE_TAG_SQL = "DELETE FROM [Tag] WHERE TID=?";
+	private static final String GET_TAG_BYTID_SQL = "SELECT * FROM [Tag] WHERE TID=?";
 	@Override
-	public void insertFilm(Film Film)
+	public void insertTag(Tag tag)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(CREATE_FILM_SQL);
-			pstm.setString(1,Film.getFID());
-			pstm.setString(2,Film.getFN());
-			pstm.setString(3,Film.getTYPE());
-			pstm.setString(4,Film.getAREA());
-			pstm.setString(5,Film.getLNG());
-			pstm.setInt(6,Film.getFT());
-			pstm.setString(7,Film.getLNG());
-			pstm.setString(8,Film.getLNG());
-			pstm.setString(9,Film.getLNG());
+			pstm = conn.prepareStatement(CREATE_TAG_SQL);
+			pstm.setString(1,tag.getTID());
+			pstm.setString(2,tag.getTN());
 			int row = pstm.executeUpdate();
 			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
@@ -37,28 +30,20 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			e.printStackTrace();
 		}
 	}
-	public void updateFilm(Film Film)
+	public void updateTag(Tag tag)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(DELETE_FILM_SQL);
-			pstm.setString(1,Film.getFID());
+			pstm = conn.prepareStatement(DELETE_TAG_SQL);
+			pstm.setString(1,tag.getTID());
 			int row = pstm.executeUpdate();
 			pstm.close();
-			pstm = conn.prepareStatement(CREATE_FILM_SQL);
-			pstm.setString(1,Film.getFID());
-			pstm.setString(2,Film.getFN());
-			pstm.setString(3,Film.getTYPE());
-			pstm.setString(4,Film.getAREA());
-			pstm.setString(5,Film.getLNG());
-			pstm.setInt(6,Film.getFT());
-			pstm.setString(7,Film.getLNG());
-			pstm.setString(8,Film.getLNG());
-			pstm.setString(9,Film.getLNG());
-			row = pstm.executeUpdate();
+			pstm = conn.prepareStatement(CREATE_TAG_SQL);
+			pstm.setString(1,tag.getTID());
+			pstm.setString(2,tag.getTN());
 			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
 			conn.close();
@@ -68,15 +53,15 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			e.printStackTrace();
 		}
 	}
-	public void deleteFilm(String fid)
+	public void deleteTag(String uid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(DELETE_FILM_SQL);
-			pstm.setString(1,fid);
+			pstm = conn.prepareStatement(DELETE_TAG_SQL);
+			pstm.setString(1,uid);
 			int row = pstm.executeUpdate();
 			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
@@ -113,7 +98,7 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		}
 	}
 	
-	public Film getFilm(String fid)
+	public Tag getTag(String tid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -121,13 +106,13 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(GET_FILM_BYUID_SQL);
-			pstm.setString(1,fid);
+			pstm = conn.prepareStatement(GET_TAG_BYTID_SQL);
+			pstm.setString(1,tid);
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				Film film = new Film(rset.getString("FID"),rset.getString("FN"),rset.getString("TYPE"),rset.getString("AREA"),rset.getString("LNG"),rset.getInt("FT"),rset.getString("AN"),rset.getString("INTRO"),rset.getString("POS"));
-				return film;
+				Tag tag = new Tag(rset.getString("TID"),rset.getString("TN"));
+				return tag;
 			}
 			pstm.close();
 			conn.close();
@@ -143,9 +128,9 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		}
 		return null;
 	}
-	public List<Film> getFilmByC(String sql)
+	public List<Tag> getTagByC(String sql)
 	{
-		List<Film> films = new ArrayList<Film>();
+		List<Tag> tags = new ArrayList<Tag>();
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rset = null;
@@ -156,9 +141,9 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				Film film = new Film(rset.getString("FID"),rset.getString("FN"),rset.getString("TYPE"),rset.getString("AREA"),rset.getString("LNG"),rset.getInt("FT"),rset.getString("AN"),rset.getString("INTRO"),rset.getString("POS"));
-				films.add(film);
-				//return film;
+				Tag tag = new Tag(rset.getString("TID"),rset.getString("TN"));
+				tags.add(tag);
+				//return tag;
 			}
 			pstm.close();
 			conn.close();
@@ -172,6 +157,6 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 		{
 			this.release(conn,pstm,rset);
 		}
-		return films;
+		return tags;
 	}
 }
