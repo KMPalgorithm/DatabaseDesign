@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class LikeListDAOImpl extends DAOBase implements LikeListDAO
 {
-	private static final String CREATE_LLIST_SQL = "INSERT INTO [LikeList] VALUES(?,?,?,?,?,?)";
+	private static final String CREATE_LLIST_SQL = "INSERT INTO [LikeList] VALUES(?,?,?,?,?)";
 	private static final String DELETE_LLIST_SQL = "DELETE FROM [LikeList] WHERE LID=?";
 	private static final String GET_LLIST_BYLID_SQL = "SELECT * FROM [LikeList] WHERE LID=?";
 	@Override
@@ -20,10 +20,9 @@ public class LikeListDAOImpl extends DAOBase implements LikeListDAO
 			pstm = conn.prepareStatement(CREATE_LLIST_SQL);
 			pstm.setString(1,LikeList.getLID());
 			pstm.setString(2,LikeList.getUID());
-			pstm.setString(3,LikeList.getFID());
-			pstm.setString(4,LikeList.getLN());
-			pstm.setString(5,LikeList.getLIntro());
-			pstm.setString(6,LikeList.getLPic());
+			pstm.setString(3,LikeList.getLN());
+			pstm.setString(4,LikeList.getLIntro());
+			pstm.setString(5,LikeList.getLPic());
 			int row = pstm.executeUpdate();
 			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
@@ -48,10 +47,9 @@ public class LikeListDAOImpl extends DAOBase implements LikeListDAO
 			pstm = conn.prepareStatement(CREATE_LLIST_SQL);
 			pstm.setString(1,LikeList.getLID());
 			pstm.setString(2,LikeList.getUID());
-			pstm.setString(3,LikeList.getFID());
-			pstm.setString(4,LikeList.getLN());
-			pstm.setString(5,LikeList.getLIntro());
-			pstm.setString(6,LikeList.getLPic());
+			pstm.setString(3,LikeList.getLN());
+			pstm.setString(4,LikeList.getLIntro());
+			pstm.setString(5,LikeList.getLPic());
 			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
 			conn.close();
@@ -119,7 +117,7 @@ public class LikeListDAOImpl extends DAOBase implements LikeListDAO
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				LikeList likeList = new LikeList(rset.getString("LID"),rset.getString("UID"),rset.getString("FID"),rset.getString("LN"),rset.getString("LIntro"),rset.getString("LPic"));
+				LikeList likeList = new LikeList(rset.getString("LID"),rset.getString("UID"), rset.getString("LN"),rset.getString("LIntro"),rset.getString("LPic"));
 				return likeList;
 			}
 			pstm.close();
@@ -149,7 +147,7 @@ public class LikeListDAOImpl extends DAOBase implements LikeListDAO
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				LikeList likeList = new LikeList(rset.getString("LID"),rset.getString("UID"),rset.getString("FID"),rset.getString("LN"),rset.getString("LIntro"),rset.getString("LPic"));
+				LikeList likeList = new LikeList(rset.getString("LID"),rset.getString("UID"), rset.getString("LN"),rset.getString("LIntro"),rset.getString("LPic"));
 				likeLists.add(likeList);
 				//return likeList;
 			}

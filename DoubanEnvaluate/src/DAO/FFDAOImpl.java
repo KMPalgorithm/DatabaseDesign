@@ -7,8 +7,8 @@ import java.sql.*;
 public class FFDAOImpl extends DAOBase implements FFDAO
 {
 	private static final String CREATE_FF_SQL = "INSERT INTO [FF] VALUES(?,?)";
-	private static final String DELETE_FF_SQL = "DELETE FROM [FF] WHERE FID=?, FFID=?";
-	private static final String GET_FF_BYTID_SQL = "SELECT * FROM [FF] WHERE FID=?, FFID=?";
+	private static final String DELETE_FF_SQL = "DELETE FROM [FF] WHERE UID=? AND FID=?";
+	private static final String GET_FF_BYTID_SQL = "SELECT * FROM [FF] WHERE UID=? AND FID=?";
 	@Override
 	public void insertFF(FF ff)
 	{
@@ -114,7 +114,7 @@ public class FFDAOImpl extends DAOBase implements FFDAO
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				FF ff = new FF(rset.getString("FID"),rset.getString("FFID"));
+				FF ff = new FF(rset.getString("UID"),rset.getString("FID"));
 				return ff;
 			}
 			pstm.close();
@@ -144,7 +144,7 @@ public class FFDAOImpl extends DAOBase implements FFDAO
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				FF ff = new FF(rset.getString("FID"),rset.getString("FFID"));
+				FF ff = new FF(rset.getString("UID"),rset.getString("FID"));
 				ffs.add(ff);
 				//return ff;
 			}

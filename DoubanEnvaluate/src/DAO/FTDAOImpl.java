@@ -7,8 +7,8 @@ import java.sql.*;
 public class FTDAOImpl extends DAOBase implements FTDAO
 {
 	private static final String CREATE_FT_SQL = "INSERT INTO [FT] VALUES(?,?,?)";
-	private static final String DELETE_FT_SQL = "DELETE FROM [FT] WHERE TID=?, TID=?";
-	private static final String GET_FT_BYTID_SQL = "SELECT * FROM [FT] WHERE TID=?, TID=?";
+	private static final String DELETE_FT_SQL = "DELETE FROM [FT] WHERE TID=? AND TID=?";
+	private static final String GET_FT_BYTID_SQL = "SELECT * FROM [FT] WHERE TID=? AND TID=?";
 	@Override
 	public void insertFT(FT ft)
 	{

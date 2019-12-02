@@ -7,8 +7,8 @@ import java.sql.*;
 public class AwardsDAOImpl extends DAOBase implements AwardsDAO
 {
 	private static final String CREATE_Awards_SQL = "INSERT INTO [Awards] VALUES(?,?,?,?)";
-	private static final String DELETE_Awards_SQL = "DELETE FROM [Awards] WHERE AID=?, ATID=?";
-	private static final String GET_Awards_BYTID_SQL = "SELECT * FROM [Awards] WHERE AID=?, ATID=?";
+	private static final String DELETE_Awards_SQL = "DELETE FROM [Awards] WHERE AID=? AND ATID=?";
+	private static final String GET_Awards_BYTID_SQL = "SELECT * FROM [Awards] WHERE AID=? AND ATID=?";
 	@Override
 	public void insertAwards(Awards awards)
 	{

@@ -7,8 +7,8 @@ import java.sql.*;
 public class FSDAOImpl extends DAOBase implements FSDAO
 {
 	private static final String CREATE_FS_SQL = "INSERT INTO [FS] VALUES(?,?,?)";
-	private static final String DELETE_FS_SQL = "DELETE FROM [FS] WHERE SID=?, FID=?";
-	private static final String GET_FS_BYTID_SQL = "SELECT * FROM [FS] WHERE SID=?, FID=?";
+	private static final String DELETE_FS_SQL = "DELETE FROM [FS] WHERE SID=? AND FID=?";
+	private static final String GET_FS_BYTID_SQL = "SELECT * FROM [FS] WHERE SID=? AND FID=?";
 	@Override
 	public void insertFS(FS fs)
 	{

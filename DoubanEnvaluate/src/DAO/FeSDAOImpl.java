@@ -4,24 +4,24 @@ import java.util.*;
 import domain.*;
 import java.sql.*;
 
-public class FUDAOImpl extends DAOBase implements FUDAO
+public class FeSDAOImpl extends DAOBase implements FeSDAO
 {
-	private static final String CREATE_FU_SQL = "INSERT INTO [FU] VALUES(?,?)";
-	private static final String DELETE_FU_SQL = "DELETE FROM [FU] WHERE UID=? AND FUID=?";
-	private static final String GET_FU_BYTID_SQL = "SELECT * FROM [FU] WHERE UID=? AND FUID=?";
+	private static final String CREATE_FeS_SQL = "INSERT INTO [FeS] VALUES(?,?)";
+	private static final String DELETE_FeS_SQL = "DELETE FROM [FeS] WHERE UID=? AND SID=?";
+	private static final String GET_FeS_BYTID_SQL = "SELECT * FROM [FeS] WHERE UID=? AND SID=?";
 	@Override
-	public void insertFU(FU fu)
+	public void insertFeS(FeS fes)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(CREATE_FU_SQL);
-			pstm.setString(1,fu.getUID());
-			pstm.setString(2,fu.getFUID());
+			pstm = conn.prepareStatement(CREATE_FeS_SQL);
+			pstm.setString(1,fes.getUID());
+			pstm.setString(2,fes.getSID());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			System.out.println("Apply Changes on" + row + "rows Successfeslly");
 			pstm.close();
 			conn.close();
 		}
@@ -30,22 +30,22 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 			e.printStackTrace();
 		}
 	}
-	public void updateFU(FU fu)
+	public void updateFeS(FeS fes)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(DELETE_FU_SQL);
-			pstm.setString(1,fu.getUID());
-			pstm.setString(2,fu.getFUID());
+			pstm = conn.prepareStatement(DELETE_FeS_SQL);
+			pstm.setString(1,fes.getUID());
+			pstm.setString(2,fes.getSID());
 			int row = pstm.executeUpdate();
 			pstm.close();
-			pstm = conn.prepareStatement(CREATE_FU_SQL);
-			pstm.setString(1,fu.getUID());
-			pstm.setString(2,fu.getFUID());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			pstm = conn.prepareStatement(CREATE_FeS_SQL);
+			pstm.setString(1,fes.getUID());
+			pstm.setString(2,fes.getSID());
+			System.out.println("Apply Changes on" + row + "rows Successfeslly");
 			pstm.close();
 			conn.close();
 		}
@@ -54,18 +54,18 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 			e.printStackTrace();
 		}
 	}
-	public void deleteFU(String fid, String fuid)
+	public void deleteFeS(String fid, String sid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(DELETE_FU_SQL);
+			pstm = conn.prepareStatement(DELETE_FeS_SQL);
 			pstm.setString(1,fid);
-			pstm.setString(2,fuid);
+			pstm.setString(2,sid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			System.out.println("Apply Changes on" + row + "rows Successfeslly");
 			pstm.close();
 			conn.close();
 		}
@@ -100,7 +100,7 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 		}
 	}
 	
-	public FU getFU(String fid, String fuid)
+	public FeS getFeS(String fid, String sid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -108,14 +108,14 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(GET_FU_BYTID_SQL);
+			pstm = conn.prepareStatement(GET_FeS_BYTID_SQL);
 			pstm.setString(1,fid);
-			pstm.setString(2,fuid);
+			pstm.setString(2,sid);
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				FU fu = new FU(rset.getString("UID"),rset.getString("FUID"));
-				return fu;
+				FeS fes = new FeS(rset.getString("UID"),rset.getString("SID"));
+				return fes;
 			}
 			pstm.close();
 			conn.close();
@@ -131,9 +131,9 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 		}
 		return null;
 	}
-	public List<FU> getFUByC(String sql)
+	public List<FeS> getFeSByC(String sql)
 	{
-		List<FU> fus = new ArrayList<FU>();
+		List<FeS> fess = new ArrayList<FeS>();
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rset = null;
@@ -144,9 +144,9 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				FU fu = new FU(rset.getString("UID"),rset.getString("FUID"));
-				fus.add(fu);
-				//return fu;
+				FeS fes = new FeS(rset.getString("UID"),rset.getString("SID"));
+				fess.add(fes);
+				//return fes;
 			}
 			pstm.close();
 			conn.close();
@@ -160,6 +160,6 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 		{
 			this.release(conn,pstm,rset);
 		}
-		return fus;
+		return fess;
 	}
 }
