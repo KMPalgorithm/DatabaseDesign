@@ -28,9 +28,16 @@ public class ChatOperation {
 	    }
 		
 		
-	public void CreatFilmChat()
+	public void CreatFilmChat(String Fid, String Cid, String Uid, Date dat, String titl, String ct, int lnum)
 	{
+		ChatDAOImpl CDI=new ChatDAOImpl();
+	
+		Chat chat= new Chat(Fid,Cid,Uid,dat,titl,ct,lnum);
+		CDI.insertChat(chat);
 		
 	}
+	
+	
+	
 	
 }
