@@ -4,24 +4,24 @@ import java.util.*;
 import domain.*;
 import java.sql.*;
 
-public class FUDAOImpl extends DAOBase implements FUDAO
+public class LtoFDAOImpl extends DAOBase implements LtoFDAO
 {
-	private static final String CREATE_FU_SQL = "INSERT INTO [FU] VALUES(?,?)";
-	private static final String DELETE_FU_SQL = "DELETE FROM [FU] WHERE UID=? AND FUID=?";
-	private static final String GET_FU_BYTID_SQL = "SELECT * FROM [FU] WHERE UID=? AND FUID=?";
+	private static final String CREATE_LtoF_SQL = "INSERT INTO [LtoF] VALUES(?,?)";
+	private static final String DELETE_LtoF_SQL = "DELETE FROM [LtoF] WHERE LID=? AND FID=?";
+	private static final String GET_LtoF_BYTID_SQL = "SELECT * FROM [LtoF] WHERE LID=? AND FID=?";
 	@Override
-	public void insertFU(FU fu)
+	public void insertLtoF(LtoF ltof)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(CREATE_FU_SQL);
-			pstm.setString(1,fu.getUID());
-			pstm.setString(2,fu.getFUID());
+			pstm = conn.prepareStatement(CREATE_LtoF_SQL);
+			pstm.setString(1,ltof.getLID());
+			pstm.setString(2,ltof.getFID());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			System.out.println("Apply Changes on" + row + "rows Successltoflly");
 			pstm.close();
 			conn.close();
 		}
@@ -30,22 +30,22 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 			e.printStackTrace();
 		}
 	}
-	public void updateFU(FU fu)
+	public void updateLtoF(LtoF ltof)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(DELETE_FU_SQL);
-			pstm.setString(1,fu.getUID());
-			pstm.setString(2,fu.getFUID());
+			pstm = conn.prepareStatement(DELETE_LtoF_SQL);
+			pstm.setString(1,ltof.getLID());
+			pstm.setString(2,ltof.getFID());
 			int row = pstm.executeUpdate();
 			pstm.close();
-			pstm = conn.prepareStatement(CREATE_FU_SQL);
-			pstm.setString(1,fu.getUID());
-			pstm.setString(2,fu.getFUID());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			pstm = conn.prepareStatement(CREATE_LtoF_SQL);
+			pstm.setString(1,ltof.getLID());
+			pstm.setString(2,ltof.getFID());
+			System.out.println("Apply Changes on" + row + "rows Successltoflly");
 			pstm.close();
 			conn.close();
 		}
@@ -54,18 +54,18 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 			e.printStackTrace();
 		}
 	}
-	public void deleteFU(String fid, String fuid)
+	public void deleteLtoF(String fid, String sid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(DELETE_FU_SQL);
+			pstm = conn.prepareStatement(DELETE_LtoF_SQL);
 			pstm.setString(1,fid);
-			pstm.setString(2,fuid);
+			pstm.setString(2,sid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			System.out.println("Apply Changes on" + row + "rows Successltoflly");
 			pstm.close();
 			conn.close();
 		}
@@ -100,7 +100,7 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 		}
 	}
 	
-	public FU getFU(String fid, String fuid)
+	public LtoF getLtoF(String fid, String sid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -108,14 +108,14 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 		try
 		{
 			conn = getConnection();
-			pstm = conn.prepareStatement(GET_FU_BYTID_SQL);
+			pstm = conn.prepareStatement(GET_LtoF_BYTID_SQL);
 			pstm.setString(1,fid);
-			pstm.setString(2,fuid);
+			pstm.setString(2,sid);
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				FU fu = new FU(rset.getString("UID"),rset.getString("FUID"));
-				return fu;
+				LtoF ltof = new LtoF(rset.getString("LID"),rset.getString("FID"));
+				return ltof;
 			}
 			pstm.close();
 			conn.close();
@@ -131,9 +131,9 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 		}
 		return null;
 	}
-	public List<FU> getFUByC(String sql)
+	public List<LtoF> getLtoFByC(String sql)
 	{
-		List<FU> fus = new ArrayList<FU>();
+		List<LtoF> ltofs = new ArrayList<LtoF>();
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rset = null;
@@ -144,9 +144,9 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
-				FU fu = new FU(rset.getString("UID"),rset.getString("FUID"));
-				fus.add(fu);
-				//return fu;
+				LtoF ltof = new LtoF(rset.getString("LID"),rset.getString("FID"));
+				ltofs.add(ltof);
+				//return ltof;
 			}
 			pstm.close();
 			conn.close();
@@ -160,6 +160,6 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 		{
 			this.release(conn,pstm,rset);
 		}
-		return fus;
+		return ltofs;
 	}
 }

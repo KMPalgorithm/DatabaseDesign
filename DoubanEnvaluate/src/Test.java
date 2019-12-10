@@ -63,10 +63,16 @@ public class Test {
 		/*ATypeDAOImpl ATDI = new ATypeDAOImpl();
 		AType atype = new AType("0123","1234");
 		ATDI.insertAType(atype);*/
-		AwardsDAOImpl ASDI = new AwardsDAOImpl();
+		/*AwardsDAOImpl ASDI = new AwardsDAOImpl();
 		Awards awards = new Awards("111","0123","11011","1");
 		
-		ASDI.insertAwards(awards);
+		ASDI.insertAwards(awards);*/
+		/*LtoFDAOImpl tmpDI = new LtoFDAOImpl();
+		LtoF fes = tmpDI.getLtoF("2","27119724");
+		System.out.println(fes.getLID() + " " + fes.getFID());*/
+		LikeListDAOImpl LLDI = new LikeListDAOImpl();
+		LikeList ll = LLDI.getLikeList("2");
+		System.out.println(ll.getLID()+" "+ll.getUID()+ll.getLN()+ll.getLIntro()+ll.getLPic());
 		
 	}
 

@@ -7,8 +7,8 @@ import java.sql.*;
 public class EvaluateDAOImpl extends DAOBase implements EvaluateDAO
 {
 	private static final String CREATE_EVALUATE_SQL = "INSERT INTO [Evaluate] VALUES(?,?,?,?,?,?,?)";
-	private static final String DELETE_EVALUATE_SQL = "DELETE FROM [Evaluate] WHERE UID=?, FID=?";
-	private static final String GET_EVALUATE_BYTID_SQL = "SELECT * FROM [Evaluate] WHERE UID=?, FID=?";
+	private static final String DELETE_EVALUATE_SQL = "DELETE FROM [Evaluate] WHERE UID=? AND FID=?";
+	private static final String GET_EVALUATE_BYTID_SQL = "SELECT * FROM [Evaluate] WHERE UID=? AND FID=?";
 	@Override
 	public void insertEvaluate(Evaluate Evaluate)
 	{

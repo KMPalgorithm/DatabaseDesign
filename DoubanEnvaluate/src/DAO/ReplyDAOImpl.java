@@ -7,8 +7,8 @@ import java.sql.*;
 public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 {
 	private static final String CREATE_REPLY_SQL = "INSERT INTO [Reply] VALUES(?,?,?,?,?)";
-	private static final String DELETE_REPLY_SQL = "DELETE FROM [Reply] WHERE ChatID=?, UID=?";
-	private static final String GET_REPLY_BYID_SQL = "SELECT * FROM [Reply] WHERE ChatID=?, UID=?";
+	private static final String DELETE_REPLY_SQL = "DELETE FROM [Reply] WHERE ChatID=? AND UID=?";
+	private static final String GET_REPLY_BYID_SQL = "SELECT * FROM [Reply] WHERE ChatID=? AND UID=?";
 	@Override
 	public void insertReply(Reply reply)
 	{
