@@ -1,1 +1,1 @@
-javac Test.java -classpath ".;D:\Project_Indeed\Database\DatabaseDesign\DatabaseDesign\DoubanEnvaluate\src\ExtJRE\*" Test.java
+javac Test.java -cp ".;D:\Project_Indeed\Database\DatabaseDesign\DatabaseDesign\DoubanEnvaluate\src\ExtJRE\*" -d ./bin @srclist.txt

@@ -1,11 +1,15 @@
 import domain.*;
 import DAO.*;
+import Function_cahieve.*;
 import java.sql.*;
 
 
 public class Test {
 
 	public static void main(String[] args) {
+		Login_douban ldb = new Login_douban ();
+		ldb.Login();
+		ldb.Registered();
 		// TODO Auto-generated method stub
 		/*User user1 = new User("111","Luochen","ISUCKDICK","138123456789","WOSI@SUOZAI.com");
 		UserDAOImpl UDI = new UserDAOImpl();
@@ -70,9 +74,9 @@ public class Test {
 		/*LtoFDAOImpl tmpDI = new LtoFDAOImpl();
 		LtoF fes = tmpDI.getLtoF("2","27119724");
 		System.out.println(fes.getLID() + " " + fes.getFID());*/
-		LikeListDAOImpl LLDI = new LikeListDAOImpl();
+		/*LikeListDAOImpl LLDI = new LikeListDAOImpl();
 		LikeList ll = LLDI.getLikeList("2");
-		System.out.println(ll.getLID()+" "+ll.getUID()+ll.getLN()+ll.getLIntro()+ll.getLPic());
+		System.out.println(ll.getLID()+" "+ll.getUID()+ll.getLN()+ll.getLIntro()+ll.getLPic());*/
 		
 	}
 

@@ -11,18 +11,13 @@ public class Login_douban
 	
 	public boolean Login(){
 	    User user=new User();
-		String sql = "select * from [user] where UN =";
+		String sql = "select * from user where UN =";
 		String name="",PWD="";
 		Scanner sc= new Scanner(System.in);
 		name=sc.next();
 		PWD=sc.next();
-		sql=sql + "'" + name + "'" ;
+		sql=sql+name;
 		List <User> Users=UDI.getUserByC(sql);
-		if(Users.size()==0)
-		{
-			System.out.println("User not found!");
-			return false;
-		}
 		String PWd_sql=Users.get(0).getPWD();
 		return PWd_sql.equals(PWD);
 	}

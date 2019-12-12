@@ -1,0 +1,1 @@
+java -classpath ".;D:\Project_Indeed\Database\DatabaseDesign\DatabaseDesign\DoubanEnvaluate\src\ExtJRE\*" Test

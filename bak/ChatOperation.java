@@ -26,18 +26,11 @@ public class ChatOperation {
 			List<Reply>replys=RDI.getReplyByC(sqlnum);
 			System.out.print(chat.getTitle()+"     À´×Ô"+user.getUN()+"   "+replys.size()+"»Ø¸´         "+chat.getDate());
 	    }
-	}
 		
-	public void CreatFilmChat(String Fid, String Cid, String Uid, Date dat, String titl, String ct, int lnum)
+		
+	public void CreatFilmChat()
 	{
-		ChatDAOImpl CDI=new ChatDAOImpl();
-	
-		Chat chat= new Chat(Fid,Cid,Uid,dat,titl,ct,lnum);
-		CDI.insertChat(chat);
 		
 	}
-	
-	
-	
 	
 }

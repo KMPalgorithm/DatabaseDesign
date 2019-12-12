@@ -154,6 +154,7 @@ public class UserDAOImpl extends DAOBase implements UserDAO
 		{
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
+			System.out.println(sql);
 			rset = pstm.executeQuery();
 			if(rset.next())
 			{
