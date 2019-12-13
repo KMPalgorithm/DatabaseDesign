@@ -13,7 +13,7 @@ public class ChatOperation {
 		ChatDAOImpl CDI=new ChatDAOImpl();
 		UserDAOImpl UDI=new UserDAOImpl();
 		ReplyDAOImpl RDI=new ReplyDAOImpl();
-		String sql="select  * from Chat where FID= ";
+		String sql="select  * from Chat where FID= '"+FID+"'";
 		String sqlnum="select  * from Reply where ChatID= ";
 		List<Chat> Chats=CDI.getChatByC(sql);
 		Iterator<Chat> listNextfilms=Chats.iterator();
@@ -22,9 +22,15 @@ public class ChatOperation {
 		{
 			chat=listNextfilms.next();
 			User user=UDI.getUser(chat.getUID());
-			sqlnum=sqlnum+chat.getCID();
+			sqlnum=sqlnum+"'"+chat.getCID()+"'";
 			List<Reply>replys=RDI.getReplyByC(sqlnum);
-			System.out.print(chat.getTitle()+"     来自"+user.getUN()+"   "+replys.size()+"回复         "+chat.getDate());
+			System.out.println("\n\n主题："+chat.getTitle()+"     来自"+user.getUN()+"   "+replys.size()+"回复         "+chat.getDate());
+			System.out.println("正文："+chat.getCont());
+			for(Reply i : replys)
+			{
+				User user2=UDI.getUser(i.getUID());
+				System.out.println("|------"+i.getCont()+"     来自"+user2.getUN()+"   "+chat.getDate());
+			}
 	    }
 	}
 		

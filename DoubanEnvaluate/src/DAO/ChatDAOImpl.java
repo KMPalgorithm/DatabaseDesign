@@ -121,7 +121,7 @@ public class ChatDAOImpl extends DAOBase implements ChatDAO
 			rset = pstm.executeQuery();
 			while(rset.next())
 			{
-				Chat chat = new Chat(rset.getString("FID"),rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Title"),rset.getString("Cont"),rset.getInt("LinkeNum"));
+				Chat chat = new Chat(rset.getString("FID"),rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Title"),rset.getString("Cont"),rset.getInt("LikeNum"));
 				return chat;
 			}
 			pstm.close();
@@ -151,7 +151,7 @@ public class ChatDAOImpl extends DAOBase implements ChatDAO
 			rset = pstm.executeQuery();
 			while(rset.next())
 			{
-				Chat chat = new Chat(rset.getString("FID"),rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Title"),rset.getString("Cont"),rset.getInt("LinkeNum"));
+				Chat chat = new Chat(rset.getString("FID"),rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Title"),rset.getString("Cont"),rset.getInt("LikeNum"));
 				chats.add(chat);
 				//return chat;
 			}

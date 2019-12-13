@@ -185,7 +185,7 @@ public class FilmShow {
 			double[] infScore=avgScore(film.getFID());
 			if(infScore[0] == -1)
 			{
-				System.out.printf("评价过少，不统计评分。");
+				System.out.println("评价过少，不统计评分。");
 			}
 			else
 			{
@@ -199,6 +199,9 @@ public class FilmShow {
 			}
 			System.out.println("豆瓣评论：");
 			this.EvaluateShow(film.getFID());
+			System.out.println("豆瓣讨论：");
+			ChatOperation copt = new ChatOperation();
+			copt.showFilmChat(film.getFID());
 		}
 		
 	}

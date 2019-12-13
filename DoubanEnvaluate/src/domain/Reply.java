@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Reply 
 {
+	private String RID;
 	private String CID;
 	private String UID;
 	private Date date;
@@ -12,7 +13,7 @@ public class Reply
 	
 	public Reply(){}
 	
-	public Reply(String cid, String uid, Date dat, String cont, int liken)
+	public Reply(String RID, String cid, String uid, Date dat, String cont, int liken)
 	{
 		CID=cid;
 		UID=uid;
@@ -21,6 +22,12 @@ public class Reply
 		LikeNum=liken;
 	}
 	
+	public String getRID() {
+		return RID;
+	}
+	public void setRID(String rID) {
+		RID = rID;
+	}
 	public String getCID() {
 		return CID;
 	}

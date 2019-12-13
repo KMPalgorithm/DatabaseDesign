@@ -2,7 +2,7 @@ import domain.*;
 import DAO.*;
 import Function_cahieve.*;
 import java.sql.*;
-
+import java.util.*;
 
 public class Test {
 
@@ -13,8 +13,16 @@ public class Test {
 			System.out.println("Wrong!");
 		}
 		ldb.Registered();*/
-		FilmShow fms = new FilmShow();
-		fms.FindNameShowFilm();
+		/*FilmShow fms = new FilmShow();
+		fms.FindNameShowFilm();*/
+		String name;
+		Scanner sc= new Scanner(System.in);
+		AdditionalFunction adf=new AdditionalFunction();
+		name=sc.next();
+		UserDAOImpl UDI = new UserDAOImpl();
+		List<User> users = UDI.getUserByC("select * from [user] where UN ='" + name +"'");
+		for(User i: users)
+		adf.showPersonInterest(i.getUID());
 		// TODO Auto-generated method stub
 		/*User user1 = new User("111","Luochen","ISUCKDICK","138123456789","WOSI@SUOZAI.com");
 		UserDAOImpl UDI = new UserDAOImpl();

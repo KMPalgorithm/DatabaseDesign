@@ -6,9 +6,9 @@ import java.sql.*;
 
 public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 {
-	private static final String CREATE_REPLY_SQL = "INSERT INTO [Reply] VALUES(?,?,?,?,?)";
-	private static final String DELETE_REPLY_SQL = "DELETE FROM [Reply] WHERE ChatID=? AND UID=?";
-	private static final String GET_REPLY_BYID_SQL = "SELECT * FROM [Reply] WHERE ChatID=? AND UID=?";
+	private static final String CREATE_REPLY_SQL = "INSERT INTO [Reply] VALUES(?,?,?,?,?,?)";
+	private static final String DELETE_REPLY_SQL = "DELETE FROM [Reply] WHERE RID=?";
+	private static final String GET_REPLY_BYID_SQL = "SELECT * FROM [Reply] WHERE RID=?";
 	@Override
 	public void insertReply(Reply reply)
 	{
@@ -18,11 +18,12 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 		{
 			conn = getConnection();
 			pstm = conn.prepareStatement(CREATE_REPLY_SQL);
-			pstm.setString(1,reply.getCID());
-			pstm.setString(2,reply.getUID());
-			pstm.setDate(3,reply.getDate());
-			pstm.setString(4,reply.getCont());
-			pstm.setInt(5,reply.getLikeNum());
+			pstm.setString(1,reply.getRID());
+			pstm.setString(2,reply.getCID());
+			pstm.setString(3,reply.getUID());
+			pstm.setDate(4,reply.getDate());
+			pstm.setString(5,reply.getCont());
+			pstm.setInt(6,reply.getLikeNum());
 			int row = pstm.executeUpdate();
 			 
 			pstm.close();
@@ -41,16 +42,16 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 		{
 			conn = getConnection();
 			pstm = conn.prepareStatement(DELETE_REPLY_SQL);
-			pstm.setString(1,reply.getCID());
-			pstm.setString(2,reply.getUID());
+			pstm.setString(1,reply.getRID());
 			int row = pstm.executeUpdate();
 			pstm.close();
 			pstm = conn.prepareStatement(CREATE_REPLY_SQL);
-			pstm.setString(1,reply.getCID());
-			pstm.setString(2,reply.getUID());
-			pstm.setDate(3,reply.getDate());
-			pstm.setString(4,reply.getCont());
-			pstm.setInt(5,reply.getLikeNum());
+			pstm.setString(1,reply.getRID());
+			pstm.setString(2,reply.getCID());
+			pstm.setString(3,reply.getUID());
+			pstm.setDate(4,reply.getDate());
+			pstm.setString(5,reply.getCont());
+			pstm.setInt(6,reply.getLikeNum());
 			 
 			pstm.close();
 			conn.close();
@@ -60,7 +61,7 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 			e.printStackTrace();
 		}
 	}
-	public void deleteReply(String uid, String fid)
+	public void deleteReply(String uid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -69,7 +70,6 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(DELETE_REPLY_SQL);
 			pstm.setString(1,uid);
-			pstm.setString(2,fid);
 			int row = pstm.executeUpdate();
 			 
 			pstm.close();
@@ -106,7 +106,7 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 		}
 	}
 	
-	public Reply getReply(String uid, String fid)
+	public Reply getReply(String uid)
 	{
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -116,11 +116,10 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(GET_REPLY_BYID_SQL);
 			pstm.setString(1,uid);
-			pstm.setString(2,fid);
 			rset = pstm.executeQuery();
 			while(rset.next())
 			{
-				Reply reply = new Reply(rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Cont"),rset.getInt("LikeNum"));
+				Reply reply = new Reply(rset.getString("RID"),rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Cont"),rset.getInt("LikeNum"));
 				return reply;
 			}
 			pstm.close();
@@ -150,7 +149,7 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 			rset = pstm.executeQuery();
 			while(rset.next())
 			{
-				Reply reply = new Reply(rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Cont"),rset.getInt("LikeNum"));
+				Reply reply = new Reply(rset.getString("RID"),rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Cont"),rset.getInt("LikeNum"));
 				replys.add(reply);
 				//return reply;
 			}
