@@ -23,13 +23,8 @@ public class UserDAOImpl extends DAOBase implements UserDAO
 			pstm.setString(3,User.getPWD());
 			pstm.setString(4,User.getPN());
 			pstm.setString(5,User.getEmail());
-			System.out.println(User.getUID());
-			System.out.println(User.getUN());
-			System.out.println(User.getPWD());
-			System.out.println(User.getPN());
-			System.out.println(User.getEmail());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -55,12 +50,6 @@ public class UserDAOImpl extends DAOBase implements UserDAO
 			pstm.setString(3,User.getPWD());
 			pstm.setString(4,User.getPN());
 			pstm.setString(5,User.getEmail());
-			System.out.println(User.getUID());
-			System.out.println(User.getUN());
-			System.out.println(User.getPWD());
-			System.out.println(User.getPN());
-			System.out.println(User.getEmail());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
 			pstm.close();
 			conn.close();
 		}
@@ -79,7 +68,7 @@ public class UserDAOImpl extends DAOBase implements UserDAO
 			pstm = conn.prepareStatement(DELETE_USER_SQL);
 			pstm.setString(1,uid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -125,7 +114,7 @@ public class UserDAOImpl extends DAOBase implements UserDAO
 			pstm = conn.prepareStatement(GET_USER_BYUID_SQL);
 			pstm.setString(1,uid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				User user = new User(rset.getString("UID"),rset.getString("UN"),rset.getString("PWD"),rset.getString("PN"),rset.getString("Email"));
 				return user;
@@ -154,9 +143,8 @@ public class UserDAOImpl extends DAOBase implements UserDAO
 		{
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
-			System.out.println(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				User user = new User(rset.getString("UID"),rset.getString("UN"),rset.getString("PWD"),rset.getString("PN"),rset.getString("Email"));
 				users.add(user);

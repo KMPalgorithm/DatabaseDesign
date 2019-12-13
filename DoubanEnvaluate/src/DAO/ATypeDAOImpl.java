@@ -21,7 +21,7 @@ public class ATypeDAOImpl extends DAOBase implements ATypeDAO
 			pstm.setString(1,aType.getATID());
 			pstm.setString(2,aType.getTName());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -44,7 +44,7 @@ public class ATypeDAOImpl extends DAOBase implements ATypeDAO
 			pstm = conn.prepareStatement(CREATE_ATYPE_SQL);
 			pstm.setString(1,aType.getATID());
 			pstm.setString(2,aType.getTName());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -63,7 +63,7 @@ public class ATypeDAOImpl extends DAOBase implements ATypeDAO
 			pstm = conn.prepareStatement(DELETE_ATYPE_SQL);
 			pstm.setString(1,uid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -109,7 +109,7 @@ public class ATypeDAOImpl extends DAOBase implements ATypeDAO
 			pstm = conn.prepareStatement(GET_ATYPE_BYATID_SQL);
 			pstm.setString(1,tid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				AType aType = new AType(rset.getString("ATID"),rset.getString("TName"));
 				return aType;
@@ -139,7 +139,7 @@ public class ATypeDAOImpl extends DAOBase implements ATypeDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				AType aType = new AType(rset.getString("ATID"),rset.getString("TName"));
 				aTypes.add(aType);

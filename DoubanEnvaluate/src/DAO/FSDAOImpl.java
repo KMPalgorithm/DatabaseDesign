@@ -22,7 +22,7 @@ public class FSDAOImpl extends DAOBase implements FSDAO
 			pstm.setString(2,fs.getFID());
 			pstm.setString(3,fs.getVoca());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -47,7 +47,7 @@ public class FSDAOImpl extends DAOBase implements FSDAO
 			pstm.setString(1,fs.getSID());
 			pstm.setString(2,fs.getFID());
 			pstm.setString(3,fs.getVoca());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -67,7 +67,7 @@ public class FSDAOImpl extends DAOBase implements FSDAO
 			pstm.setString(1,sid);
 			pstm.setString(2,fid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -114,7 +114,7 @@ public class FSDAOImpl extends DAOBase implements FSDAO
 			pstm.setString(1,sid);
 			pstm.setString(2,fid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				FS fs = new FS(rset.getString("SID"),rset.getString("FID"),rset.getString("Voca"));
 				return fs;
@@ -144,7 +144,7 @@ public class FSDAOImpl extends DAOBase implements FSDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				FS fs = new FS(rset.getString("SID"),rset.getString("FID"),rset.getString("Voca"));
 				fss.add(fs);

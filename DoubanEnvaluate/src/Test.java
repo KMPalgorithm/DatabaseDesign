@@ -7,9 +7,14 @@ import java.sql.*;
 public class Test {
 
 	public static void main(String[] args) {
-		Login_douban ldb = new Login_douban ();
-		ldb.Login();
-		ldb.Registered();
+		/*Login_douban ldb = new Login_douban ();
+		while(!ldb.Login())
+		{
+			System.out.println("Wrong!");
+		}
+		ldb.Registered();*/
+		FilmShow fms = new FilmShow();
+		fms.FindNameShowFilm();
 		// TODO Auto-generated method stub
 		/*User user1 = new User("111","Luochen","ISUCKDICK","138123456789","WOSI@SUOZAI.com");
 		UserDAOImpl UDI = new UserDAOImpl();

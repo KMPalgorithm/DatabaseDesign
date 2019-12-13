@@ -24,7 +24,7 @@ public class LikeListDAOImpl extends DAOBase implements LikeListDAO
 			pstm.setString(4,LikeList.getLIntro());
 			pstm.setString(5,LikeList.getLPic());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -50,7 +50,7 @@ public class LikeListDAOImpl extends DAOBase implements LikeListDAO
 			pstm.setString(3,LikeList.getLN());
 			pstm.setString(4,LikeList.getLIntro());
 			pstm.setString(5,LikeList.getLPic());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -69,7 +69,7 @@ public class LikeListDAOImpl extends DAOBase implements LikeListDAO
 			pstm = conn.prepareStatement(DELETE_LLIST_SQL);
 			pstm.setString(1,uid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -115,7 +115,7 @@ public class LikeListDAOImpl extends DAOBase implements LikeListDAO
 			pstm = conn.prepareStatement(GET_LLIST_BYLID_SQL);
 			pstm.setString(1,tid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				LikeList likeList = new LikeList(rset.getString("LID"),rset.getString("UID"), rset.getString("LN"),rset.getString("LIntro"),rset.getString("LPic"));
 				return likeList;
@@ -145,7 +145,7 @@ public class LikeListDAOImpl extends DAOBase implements LikeListDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				LikeList likeList = new LikeList(rset.getString("LID"),rset.getString("UID"), rset.getString("LN"),rset.getString("LIntro"),rset.getString("LPic"));
 				likeLists.add(likeList);

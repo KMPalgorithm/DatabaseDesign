@@ -21,7 +21,7 @@ public class TagDAOImpl extends DAOBase implements TagDAO
 			pstm.setString(1,tag.getTID());
 			pstm.setString(2,tag.getTN());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -44,7 +44,7 @@ public class TagDAOImpl extends DAOBase implements TagDAO
 			pstm = conn.prepareStatement(CREATE_TAG_SQL);
 			pstm.setString(1,tag.getTID());
 			pstm.setString(2,tag.getTN());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -63,7 +63,7 @@ public class TagDAOImpl extends DAOBase implements TagDAO
 			pstm = conn.prepareStatement(DELETE_TAG_SQL);
 			pstm.setString(1,uid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -109,7 +109,7 @@ public class TagDAOImpl extends DAOBase implements TagDAO
 			pstm = conn.prepareStatement(GET_TAG_BYTID_SQL);
 			pstm.setString(1,tid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Tag tag = new Tag(rset.getString("TID"),rset.getString("TN"));
 				return tag;
@@ -139,7 +139,7 @@ public class TagDAOImpl extends DAOBase implements TagDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Tag tag = new Tag(rset.getString("TID"),rset.getString("TN"));
 				tags.add(tag);

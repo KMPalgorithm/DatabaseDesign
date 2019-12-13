@@ -112,7 +112,7 @@ public class LtoFDAOImpl extends DAOBase implements LtoFDAO
 			pstm.setString(1,fid);
 			pstm.setString(2,sid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				LtoF ltof = new LtoF(rset.getString("LID"),rset.getString("FID"));
 				return ltof;
@@ -142,7 +142,7 @@ public class LtoFDAOImpl extends DAOBase implements LtoFDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				LtoF ltof = new LtoF(rset.getString("LID"),rset.getString("FID"));
 				ltofs.add(ltof);

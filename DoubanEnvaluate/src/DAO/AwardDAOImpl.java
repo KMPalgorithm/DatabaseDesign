@@ -22,7 +22,7 @@ public class AwardDAOImpl extends DAOBase implements AwardDAO
 			pstm.setString(2,Award.getAName());
 			pstm.setString(3,Award.getAIntro());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -46,7 +46,7 @@ public class AwardDAOImpl extends DAOBase implements AwardDAO
 			pstm.setString(1,Award.getAID());
 			pstm.setString(2,Award.getAName());
 			pstm.setString(3,Award.getAIntro());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -65,7 +65,7 @@ public class AwardDAOImpl extends DAOBase implements AwardDAO
 			pstm = conn.prepareStatement(DELETE_AWARD_SQL);
 			pstm.setString(1,uid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -111,7 +111,7 @@ public class AwardDAOImpl extends DAOBase implements AwardDAO
 			pstm = conn.prepareStatement(GET_AWARD_BYAID_SQL);
 			pstm.setString(1,aid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Award award = new Award(rset.getString("AID"),rset.getString("AName"),rset.getString("AIntro"));
 				return award;
@@ -141,7 +141,7 @@ public class AwardDAOImpl extends DAOBase implements AwardDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Award award = new Award(rset.getString("AID"),rset.getString("AName"),rset.getString("AIntro"));
 				awards.add(award);

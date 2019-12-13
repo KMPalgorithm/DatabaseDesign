@@ -26,7 +26,7 @@ public class EvaluateDAOImpl extends DAOBase implements EvaluateDAO
 			pstm.setString(6,Evaluate.getUT());
 			pstm.setDate(7,Evaluate.getEDate());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -55,7 +55,7 @@ public class EvaluateDAOImpl extends DAOBase implements EvaluateDAO
 			pstm.setString(5,Evaluate.getStatus());
 			pstm.setString(6,Evaluate.getUT());
 			pstm.setDate(7,Evaluate.getEDate());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -75,7 +75,7 @@ public class EvaluateDAOImpl extends DAOBase implements EvaluateDAO
 			pstm.setString(1,uid);
 			pstm.setString(2,fid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -122,7 +122,7 @@ public class EvaluateDAOImpl extends DAOBase implements EvaluateDAO
 			pstm.setString(1,uid);
 			pstm.setString(2,fid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Evaluate evaluate = new Evaluate(rset.getString("UID"),rset.getString("FID"),rset.getInt("Score"),rset.getString("CMT"),rset.getString("Status"),rset.getString("UT"),rset.getDate("EDate"));
 				return evaluate;
@@ -152,7 +152,7 @@ public class EvaluateDAOImpl extends DAOBase implements EvaluateDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Evaluate evaluate = new Evaluate(rset.getString("UID"),rset.getString("FID"),rset.getInt("Score"),rset.getString("CMT"),rset.getString("Status"),rset.getString("UT"),rset.getDate("EDate"));
 				evaluates.add(evaluate);

@@ -112,7 +112,7 @@ public class FeSDAOImpl extends DAOBase implements FeSDAO
 			pstm.setString(1,fid);
 			pstm.setString(2,sid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				FeS fes = new FeS(rset.getString("UID"),rset.getString("SID"));
 				return fes;
@@ -142,7 +142,7 @@ public class FeSDAOImpl extends DAOBase implements FeSDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				FeS fes = new FeS(rset.getString("UID"),rset.getString("SID"));
 				fess.add(fes);

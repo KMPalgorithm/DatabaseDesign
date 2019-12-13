@@ -24,7 +24,7 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 			pstm.setString(4,reply.getCont());
 			pstm.setInt(5,reply.getLikeNum());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -51,7 +51,7 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 			pstm.setDate(3,reply.getDate());
 			pstm.setString(4,reply.getCont());
 			pstm.setInt(5,reply.getLikeNum());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -71,7 +71,7 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 			pstm.setString(1,uid);
 			pstm.setString(2,fid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -118,7 +118,7 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 			pstm.setString(1,uid);
 			pstm.setString(2,fid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Reply reply = new Reply(rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Cont"),rset.getInt("LikeNum"));
 				return reply;
@@ -148,7 +148,7 @@ public class ReplyDAOImpl extends DAOBase implements ReplyDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Reply reply = new Reply(rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Cont"),rset.getInt("LikeNum"));
 				replys.add(reply);

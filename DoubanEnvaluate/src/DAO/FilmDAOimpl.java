@@ -28,7 +28,7 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			pstm.setString(8,Film.getLNG());
 			pstm.setString(9,Film.getLNG());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -59,7 +59,7 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			pstm.setString(8,Film.getLNG());
 			pstm.setString(9,Film.getLNG());
 			row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -78,7 +78,7 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			pstm = conn.prepareStatement(DELETE_FILM_SQL);
 			pstm.setString(1,fid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -124,7 +124,7 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			pstm = conn.prepareStatement(GET_FILM_BYUID_SQL);
 			pstm.setString(1,fid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Film film = new Film(rset.getString("FID"),rset.getString("FN"),rset.getString("TYPE"),rset.getString("AREA"),rset.getString("LNG"),rset.getInt("FT"),rset.getString("AN"),rset.getString("INTRO"),rset.getString("POS"));
 				return film;
@@ -154,7 +154,7 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Film film = new Film(rset.getString("FID"),rset.getString("FN"),rset.getString("TYPE"),rset.getString("AREA"),rset.getString("LNG"),rset.getInt("FT"),rset.getString("AN"),rset.getString("INTRO"),rset.getString("POS"));
 				films.add(film);

@@ -21,7 +21,7 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 			pstm.setString(1,fu.getUID());
 			pstm.setString(2,fu.getFUID());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -45,7 +45,7 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 			pstm = conn.prepareStatement(CREATE_FU_SQL);
 			pstm.setString(1,fu.getUID());
 			pstm.setString(2,fu.getFUID());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -65,7 +65,7 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 			pstm.setString(1,fid);
 			pstm.setString(2,fuid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -112,7 +112,7 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 			pstm.setString(1,fid);
 			pstm.setString(2,fuid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				FU fu = new FU(rset.getString("UID"),rset.getString("FUID"));
 				return fu;
@@ -142,7 +142,7 @@ public class FUDAOImpl extends DAOBase implements FUDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				FU fu = new FU(rset.getString("UID"),rset.getString("FUID"));
 				fus.add(fu);

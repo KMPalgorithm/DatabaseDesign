@@ -28,7 +28,7 @@ public class StuffDAOImpl extends DAOBase implements StuffDAO
 			pstm.setString(8,stuff.getSIntro());
 			pstm.setString(9,stuff.getSPic());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -58,7 +58,7 @@ public class StuffDAOImpl extends DAOBase implements StuffDAO
 			pstm.setString(7,stuff.getMN());
 			pstm.setString(8,stuff.getSIntro());
 			pstm.setString(9,stuff.getSPic());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -77,7 +77,7 @@ public class StuffDAOImpl extends DAOBase implements StuffDAO
 			pstm = conn.prepareStatement(DELETE_STUFF_SQL);
 			pstm.setString(1,uid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -123,7 +123,7 @@ public class StuffDAOImpl extends DAOBase implements StuffDAO
 			pstm = conn.prepareStatement(GET_STUFF_BYAID_SQL);
 			pstm.setString(1,tid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Stuff stuff = new Stuff(rset.getString("SID"),rset.getString("SN"),rset.getString("Sex"),rset.getDate("BDate"),rset.getString("BP"),rset.getString("Voca"),rset.getString("MN"),rset.getString("SIntro"),rset.getString("SPic"));
 				return stuff;
@@ -153,7 +153,7 @@ public class StuffDAOImpl extends DAOBase implements StuffDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Stuff stuff = new Stuff(rset.getString("SID"),rset.getString("SN"),rset.getString("Sex"),rset.getDate("BDate"),rset.getString("BP"),rset.getString("Voca"),rset.getString("MN"),rset.getString("SIntro"),rset.getString("SPic"));
 				stuffs.add(stuff);

@@ -22,7 +22,7 @@ public class FTDAOImpl extends DAOBase implements FTDAO
 			pstm.setString(2,ft.getTID());
 			pstm.setInt(3,ft.getTC());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -47,7 +47,7 @@ public class FTDAOImpl extends DAOBase implements FTDAO
 			pstm.setString(1,ft.getFID());
 			pstm.setString(2,ft.getTID());
 			pstm.setInt(3,ft.getTC());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -67,7 +67,7 @@ public class FTDAOImpl extends DAOBase implements FTDAO
 			pstm.setString(1,fid);
 			pstm.setString(2,tid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -114,7 +114,7 @@ public class FTDAOImpl extends DAOBase implements FTDAO
 			pstm.setString(1,fid);
 			pstm.setString(2,tid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				FT ft = new FT(rset.getString("FID"),rset.getString("TID"),rset.getInt("TC"));
 				return ft;
@@ -144,7 +144,7 @@ public class FTDAOImpl extends DAOBase implements FTDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				FT ft = new FT(rset.getString("FID"),rset.getString("TID"),rset.getInt("TC"));
 				fts.add(ft);

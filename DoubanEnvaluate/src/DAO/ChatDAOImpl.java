@@ -26,7 +26,7 @@ public class ChatDAOImpl extends DAOBase implements ChatDAO
 			pstm.setString(6,chat.getCont());
 			pstm.setInt(7,chat.getLikeNum());
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -54,7 +54,7 @@ public class ChatDAOImpl extends DAOBase implements ChatDAO
 			pstm.setString(5,chat.getTitle());
 			pstm.setString(6,chat.getCont());
 			pstm.setInt(7,chat.getLikeNum());
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -73,7 +73,7 @@ public class ChatDAOImpl extends DAOBase implements ChatDAO
 			pstm = conn.prepareStatement(DELETE_CHAT_SQL);
 			pstm.setString(1,uid);
 			int row = pstm.executeUpdate();
-			System.out.println("Apply Changes on" + row + "rows Successfully");
+			 
 			pstm.close();
 			conn.close();
 		}
@@ -119,7 +119,7 @@ public class ChatDAOImpl extends DAOBase implements ChatDAO
 			pstm = conn.prepareStatement(GET_CHAT_BYTID_SQL);
 			pstm.setString(1,cid);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Chat chat = new Chat(rset.getString("FID"),rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Title"),rset.getString("Cont"),rset.getInt("LinkeNum"));
 				return chat;
@@ -149,7 +149,7 @@ public class ChatDAOImpl extends DAOBase implements ChatDAO
 			conn = getConnection();
 			pstm = conn.prepareStatement(sql);
 			rset = pstm.executeQuery();
-			if(rset.next())
+			while(rset.next())
 			{
 				Chat chat = new Chat(rset.getString("FID"),rset.getString("ChatID"),rset.getString("UID"),rset.getDate("Date"),rset.getString("Title"),rset.getString("Cont"),rset.getInt("LinkeNum"));
 				chats.add(chat);
