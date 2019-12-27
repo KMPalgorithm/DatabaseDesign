@@ -60,7 +60,8 @@ public class FilmShow {
 		ATypeDAOImpl ATDI=new ATypeDAOImpl();
 		AwardDAOImpl ADI=new AwardDAOImpl();
 		StuffDAOImpl SDI=new StuffDAOImpl();
-		String sql="select  * from Awards where FID=";
+		FilmDAOImpl FDI = new FilmDAOImpl();
+		String sql="select  * from Awards where FID='" + FID + "'";
 		List<Awards> aws=ASDI.getAwardsByC(sql);
 		Iterator<Awards> listNextas=aws.iterator();
 		while(listNextas.hasNext())
@@ -68,7 +69,10 @@ public class FilmShow {
 			Awards curr=listNextas.next();
 			System.out.print(ADI.getAward(curr.getAID()).getAName()+" ");
 			System.out.print(ATDI.getAType(curr.getATID()).getTName()+" ");
-			System.out.print(SDI.getStuff(curr.getSID()).getSN());
+			if(curr.getSID()!=null)
+			System.out.println("获奖人员：" + SDI.getStuff(curr.getSID()).getSN());
+			if(curr.getFID()!=null)
+			System.out.println("获奖选手：" + FDI.getFilm(curr.getFID()).getFN());
 		}
 	}
 	
@@ -120,10 +124,13 @@ public class FilmShow {
 			ArrayList<String> Aname=new ArrayList<String> ();
 			sqlfs=sqlfs+"'"+film.getFID()+"'";
 			List<FS> fss=FSDI.getFSByC(sqlfs);
+			//System.out.println("sql: "+sqlfs);
 			Iterator<FS> listNextfs=fss.iterator();
 			while(listNextfs.hasNext())
 			{
 				FS currfs=listNextfs.next();
+				//System.out.println("JKFHSJKHFJKLSDHFJKLHSDJKFHSJKDGHJKSDGHFKL!!!");
+				//System.out.println(currfs.getVoca());
 				if(currfs.getVoca().equals("导演"))
 				{
 					sname=SDI.getStuff(currfs.getSID()).getSN();
@@ -176,6 +183,8 @@ public class FilmShow {
 			System.out.println(film.getTYPE());
 			System.out.println("又名");
 			System.out.println(film.getAN());
+			//System.out.println("获奖情况：");
+			AwardShow(film.getFID());
 			System.out.println("常用标签");
 			this.TagShow(film.getFID());
 			System.out.println("");

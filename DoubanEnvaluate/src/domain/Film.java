@@ -25,6 +25,7 @@ public class Film {
 		FT=ft;
 		AN=an;
 		INTRO=intro;
+		TYPE=type;
 		POS=pos;
 	}
 	

@@ -157,6 +157,7 @@ public class FilmDAOImpl extends DAOBase implements FilmDAO
 			while(rset.next())
 			{
 				Film film = new Film(rset.getString("FID"),rset.getString("FN"),rset.getString("TYPE"),rset.getString("AREA"),rset.getString("LNG"),rset.getInt("FT"),rset.getString("AN"),rset.getString("INTRO"),rset.getString("POS"));
+				//System.out.println("DEBUG!!!!!!!!!!!!!!!!!!!!:"+rset.getString("TYPE"));
 				films.add(film);
 				//return film;
 			}

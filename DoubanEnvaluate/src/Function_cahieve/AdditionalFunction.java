@@ -35,6 +35,8 @@ public class AdditionalFunction {
 		FilmDAOImpl FDI = new FilmDAOImpl();
 		StuffDAOImpl SDI = new StuffDAOImpl();
 		FUDAOImpl fuDI = new FUDAOImpl();
+		LikeListDAOImpl LLDI = new LikeListDAOImpl();
+		LtoFDAOImpl LtFDI = new LtoFDAOImpl();
 		User user=UDI.getUser(Uid);
 		System.out.println("关注的演员：");
 		//System.out.println("select * from [FeS] where UID = '" + user.getUID() +"'");
@@ -70,6 +72,23 @@ public class AdditionalFunction {
 			User user2 = UDI.getUser(i.getFUID());
 			System.out.println(user2.getUN());
 		}
+		
+		System.out.println("收藏：");
+		sql="select * from [LikeList] where UID = '" + user.getUID() + "'";
+		List<LikeList> llist= LLDI.getLikeListByC(sql);
+		for(LikeList i : llist)
+		{
+			System.out.println(i.getLIntro());
+			sql = "select * from [LtoF] where LID = '" + i.getLID() + "'";
+			List<LtoF> ltfs = LtFDI.getLtoFByC(sql);
+			for(LtoF j : ltfs)
+			{
+				Film tfilm = FDI.getFilm(j.getFID());
+				System.out.println("|--   " + tfilm.getFN());
+			}
+			System.out.println("================");
+		}
+		
 	}
 }
 
