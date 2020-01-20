@@ -13,8 +13,9 @@ public class Test {
 			System.out.println("Wrong!");
 		}
 		ldb.Registered();*/
-		FilmShow fms = new FilmShow();
-		fms.FindNameShowFilm();
+		TagDAOImpl tDI= new TagDAOImpl();
+		Tag tag = new Tag("10", "changedTest");
+		tDI.updateTag(tag);
 		/*String name;
 		Scanner sc= new Scanner(System.in);
 		AdditionalFunction adf=new AdditionalFunction();

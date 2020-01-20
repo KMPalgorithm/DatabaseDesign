@@ -40,11 +40,10 @@ public class TagDAOImpl extends DAOBase implements TagDAO
 			pstm = conn.prepareStatement(DELETE_TAG_SQL);
 			pstm.setString(1,tag.getTID());
 			int row = pstm.executeUpdate();
-			pstm.close();
 			pstm = conn.prepareStatement(CREATE_TAG_SQL);
 			pstm.setString(1,tag.getTID());
 			pstm.setString(2,tag.getTN());
-			 
+			pstm.executeUpdate();
 			pstm.close();
 			conn.close();
 		}
